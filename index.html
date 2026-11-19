@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEPALY KEY • Starter Final Exam</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.45;padding:12px;padding-top:64px}
+.tbar{position:fixed;top:0;left:0;right:0;background:#0f172a;color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:999;border-bottom:3px solid #f59e0b}
+.tval{font-size:18px;font-weight:900;color:#f59e0b}
+.tval.dng{color:#ef4444}
+.wrap{max-width:720px;margin:0 auto}
+.hdr{background:#0f172a;color:#fff;padding:18px;border-radius:14px;border-bottom:5px solid #f59e0b;margin-bottom:14px;text-align:center}
+.bdg{display:inline-block;background:#f59e0b;color:#0f172a;font-weight:800;font-size:11px;padding:3px 10px;border-radius:20px;margin-bottom:6px}
+.hdr h1{font-size:20px;margin-bottom:4px}
+.hdr p{font-size:13px;color:#cbd5e1}
+.box,.card{background:#fff;padding:14px;border-radius:12px;border:1px solid #cbd5e1;margin-bottom:12px}
+.box label{display:block;font-weight:700;font-size:14px;margin-bottom:7px}
+.box input{width:100%;padding:11px;border:1.5px solid #cbd5e1;border-radius:8px;font-size:15px}
+.card.ok{border:2px solid #16a34a;background:#f0fdf4}
+.card.no{border:2px solid #dc2626;background:#fef2f2}
+.qt{font-weight:700;font-size:15px;margin-bottom:9px}
+.qn{background:#0f172a;color:#fff;font-size:12px;padding:1px 7px;border-radius:6px;margin-right:6px}
+.opt{display:flex;align-items:center;gap:10px;padding:9px 11px;border:1px solid #cbd5e1;border-radius:8px;margin-bottom:6px;background:#f8fafc;font-size:14px}
+.opt input{width:17px;height:17px;accent-color:#2563eb}
+.exp{margin-top:8px;padding:8px 10px;border-radius:7px;font-size:13px;font-weight:600;display:none}
+.card.ok .exp{display:block;background:#dcfce7;color:#16a34a}
+.card.no .exp{display:block;background:#fee2e2;color:#dc2626}
+.btn{width:100%;padding:15px;background:#2563eb;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:800;margin-top:6px;display:block;text-align:center;text-decoration:none}
+.btn:disabled{background:#94a3b8}
+.tg{background:#0088cc;margin-top:12px}
+.wa{background:#16a34a;margin-top:10px}
+.res{display:none;background:#fff;border-radius:14px;padding:18px;margin-top:16px;text-align:center;border:2px solid #0f172a}
+.sc{font-size:30px;font-weight:900;margin:6px 0}
+.pill{display:inline-block;padding:6px 15px;border-radius:20px;font-weight:800;font-size:13px}
+.pass{background:#dcfce7;color:#16a34a}
+.fail{background:#fee2e2;color:#dc2626}
+.lock{background:#fef3c7;color:#92400e;padding:10px;border-radius:8px;font-size:13px;font-weight:700;margin-top:12px}
+.ftr{text-align:center;font-size:12px;color:#64748b;margin:20px 0 10px}
+</style>
+</head>
+<body>
+<div class="tbar"><span>⏱ Time Left:</span><span class="tval" id="tDisp">20:00</span></div>
+<div class="wrap">
+  <div class="hdr">
+    <div class="bdg">VEPALY-ONLINE EDUCATION CENTER • VEPALY KEY</div>
+    <h1>Final Grammar Exam: Preparation Beginner</h1>
+    <p>30 Questions • 20 Min • Pass: 70% (21/30) • 1 Attempt Only</p>
+  </div>
+  <div class="box">
+    <label for="stName">Student Full Name (Имя и фамилия) *:</label>
+    <input type="text" id="stName" placeholder="Enter your full name...">
+  </div>
+  <div id="quiz"></div>
+  <button type="button" class="btn" id="subBtn">Submit &amp; Finish Exam (Завершить тест)</button>
+  <div class="res" id="resBox">
+    <div id="rName" style="font-weight:700;color:#475569"></div>
+    <div class="sc" id="rScore"></div>
+    <div id="rStat" class="pill"></div>
+    <p id="rMsg" style="margin-top:10px;font-size:14px"></p>
+    <a href="#" target="_blank" class="btn tg" id="tgLink">✈ Send Result to Teacher (Telegram)</a>
+    <a href="#" target="_blank" class="btn wa" id="waLink">💬 Send Result to Teacher (WhatsApp)</a>
+    <div class="lock">🔒 Exam Locked. Retake is disabled.</div>
+  </div>
+  <div class="ftr">VEPALY-ONLINE EDUCATION CENTER • Program: VEPALY KEY • Starter Level</div>
+</div>
+<script>
+var KEY="vepaly_starter_v2",SEC=1200,tLeft=SEC,tid=null,done=false;
+var Q=[
+["___ am a student.",["He","I","They"],1,"I am."],
+["My sister and I = ___",["they","you","we"],2,"Моя сестра и я = we."],
+["She ___ a doctor.",["am","is","are"],1,"Для he/she/it ставим is."],
+["___ they from London?",["Is","Am","Are"],2,"Для they ставим Are."],
+["I see ___ elephant at the zoo.",["a","an","two"],1,"Гласный звук — an elephant."],
+["It is ___ blue umbrella.",["a","an","are"],0,"Согласный звук [b] — a."],
+["She ___ red apples.",["like","likes","to like"],1,"После she добавляем -s."],
+["Tom ___ a black car.",["have","haves","has"],2,"Для he/she/it — has."],
+["___ you like green tea?",["Do","Does","Are"],0,"Вопрос с you — Do."],
+["He ___ like grey.",["don't","isn't","doesn't"],2,"Отрицание для he — doesn't."],
+["Red + Yellow = ___",["Green","Orange","Purple"],1,"Красный + жёлтый = Orange."],
+["How do you write 15?",["fifty","fiveteen","fifteen"],2,"15 = fifteen."],
+["How do you write 40?",["fourty","forty","fourteen"],1,"40 = forty (без u)."],
+["85 in English is ___",["eighty-five","eighteen-five","fifty-eight"],0,"85 = eighty-five."],
+["I have two ___.",["key","keys","a key"],1,"Множественное число: keys."],
+["The opposite of BIG is ___.",["tall","small","fast"],1,"Антоним big — small."],
+["The opposite of HOT is ___.",["cold","heavy","clean"],0,"Антоним hot — cold."],
+["It is ___.",["a car red","red car","a red car"],2,"Прилагательное перед существительным."],
+["___ is your name?",["Who","What","Where"],1,"What is your name?"],
+["___ are you from?",["Where","Which","How old"],0,"Where are you from?"],
+["___ pens do you have? — Three.",["How old","How many","Who"],1,"Сколько предметов — How many."],
+["___ book here is mine.",["This","These","Those"],0,"Один предмет рядом — This."],
+["Look at ___ birds in the sky!",["this","these","those"],2,"Много предметов далеко — those."],
+["We ___ English every day.",["study","studies","to study"],0,"После we глагол без -s и to."],
+["___ the door, please!",["To open","Open","Opens"],1,"Повелительное: глагол без to."],
+["___ touch it! It is hot!",["Not","No","Don't"],2,"Запрет: Don't + глагол."],
+["___ go to the park!",["Let's","Let","We"],0,"Совместное действие: Let's go!"],
+["A fish ___ swim.",["can","cans","can to"],0,"Can без -s и без to."],
+["A penguin ___ fly.",["can","can't","don't can"],1,"Отрицание — can't."],
+["___ you drive a car?",["Do","Are","Can"],2,"Вопрос с can: Can на 1-е место."]
+];
+var h="",i,j;
+for(i=0;i<Q.length;i++){
+  h+='<div class="card" id="c'+i+'"><div class="qt"><span class="qn">'+(i+1)+'</span>'+Q[i]+'</div>';
+  for(j=0;j<Q[i].length;j++)h+='<label class="opt"><input type="radio" name="q'+i+'" value="'+j+'"><span>'+Q[i][j]+'</span></label>';
+  h+='<div class="exp" id="e'+i+'"></div></div>';
+}
+document.getElementById("quiz").innerHTML=h;
+function fmt(s){var m=Math.floor(s/60),r=s%60;return(m<10?"0":"")+m+":"+(r<10?"0":"")+r;}
+function showRes(d){
+  done=true;clearInterval(tid);
+  document.getElementById("tDisp").textContent="DONE";
+  var nm=document.getElementById("stName");nm.value=d.n;nm.disabled=true;
+  var sb=document.getElementById("subBtn");sb.disabled=true;sb.textContent="Exam Completed";
+  var rs=document.querySelectorAll('input[type="radio"]');
+  for(i=0;i<rs.length;i++)rs[i].disabled=true;
+  for(i=0;i<Q.length;i++){
+    if(d.a[i]!==null){var r=document.querySelector('input[name="q'+i+'"][value="'+d.a[i]+'"]');if(r)r.checked=true;}
+    var c=document.getElementById("c"+i),e=document.getElementById("e"+i);
+    if(d.a[i]===Q[i]){c.className="card ok";e.textContent="✓ Correct! "+Q[i];}
+    else{c.className="card no";e.textContent="✗ Answer: "+Q[i][Q[i]]+". "+Q[i];}
+  }
+  document.getElementById("rName").textContent="Student: "+d.n;
+  document.getElementById("rScore").textContent=d.s+" / "+Q.length+" ("+d.p+"%)";
+  var st=document.getElementById("rStat");
+  if(d.p>=70){st.textContent="PASSED • PROMOTED TO BEGINNER (A1)";st.className="pill pass";document.getElementById("rMsg").textContent="Поздравляем! Нажмите кнопку ниже, чтобы отправить результат учителю.";}
+  else{st.textContent="FAILED (< 70%)";st.className="pill fail";document.getElementById("rMsg").textContent="Результат зафиксирован. Отправьте отчёт учителю кнопкой ниже.";}
+  var txt="VEPALY-ONLINE EDUCATION CENTER\nExam: Starter Final Test\nStudent: "+d.n+"\nScore: "+d.s+"/"+Q.length+" ("+d.p+"%)\nStatus: "+(d.p>=70?"PASSED":"FAILED")+"\nTime: "+d.t+"\nMistakes: "+(d.w.length?d.w.join(","):"None");
+  var enc=encodeURIComponent(txt);
+  document.getElementById("tgLink").href="https://t.me"+enc;
+  document.getElementById("waLink").href="https://wa.me"+enc;
+  var rb=document.getElementById("resBox");rb.style.display="block";rb.scrollIntoView({behavior:"smooth"});
+}
+function finish(auto){
+  if(done)return;
+  var n=document.getElementById("stName").value.trim();
+  if(!n&&!auto){alert("Please enter your full name! / Введите ваше имя!");return;}
+  var sc=0,ans=[],wr=[];
+  for(i=0;i<Q.length;i++){
+    var s=document.querySelector('input[name="q'+i+'"]:checked');
+    var v=s?Number(s.value):null;ans.push(v);
+    if(v===Q[i])sc++;else wr.push(i+1);
+  }
+  var d={n:n||"Student (Timeout)",s:sc,p:Math.round(sc/Q.length*100),a:ans,w:wr,t:fmt(SEC-tLeft)};
+  try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}
+  showRes(d);
+}
+document.getElementById("subBtn").onclick=function(){finish(false);};
+var sv=null;try{sv=localStorage.getItem(KEY);}catch(e){}
+if(sv){showRes(JSON.parse(sv));}else{
+  tid=setInterval(function(){if(done)return;tLeft--;var el=document.getElementById("tDisp");el.textContent=fmt(tLeft);if(tLeft<=120)el.className="tval dng";if(tLeft<=0)finish(true);},1000);
+}
+</script>
+</body>
+</html>
